@@ -34,13 +34,16 @@
   <!-- Variable containing all necessary data for a certain style of bibliography. -->
   <xsl:variable name="data">
     <general>
-      <stylename>A BibWord Citation and Bibliograpy Style</stylename>
+      <stylename>ДСТУ 7.1:2006</stylename>
+      <version>2016.08.15</version>
       <version>2009.11.28</version>
       <author>Yves Dhondt (yves.dhondt@gmail.com)</author>
-      <description>An implementation of a style.</description>
-      <URL>http://bibword.codeplex.com/updateStyle?id=123</URL>
+      <author>Yevhenii Kyshko (meteogish@gmail.com)</author>
+      <description>Style for making automatic bibliography in MS Word by DSTU 7.1:2006 (with additions in 2013)</description>
+      <URL>https://github.com/meteogish/UKRBib-Style-For-Word</URL>
       <comments>
-        This is version 2.8 of the BibWord stylesheet.
+        This style based on version 2.8 of the BibWord stylesheet.
+        But with added multilingual support of sources and months.
       </comments>
       <display_errors>yes</display_errors>
       <citation_as_link>no</citation_as_link>
@@ -55,7 +58,7 @@
         <b:ImportantField>b:Year</b:ImportantField>
         <b:ImportantField>b:City</b:ImportantField>
         <b:ImportantField>b:Issue</b:ImportantField>
-        <b:ImportantField>b:Comments</b:ImportantField>      
+        <b:ImportantField>b:Comments</b:ImportantField>
       </source>
       <source type="Book">
         <b:ImportantField>b:Author/b:Author/b:NameList</b:ImportantField>
@@ -82,19 +85,19 @@
         <b:ImportantField>b:Year</b:ImportantField>
         <b:ImportantField>b:Volume</b:ImportantField>
         <b:ImportantField>b:Publisher</b:ImportantField>
-        <b:ImportantField>b:Comments</b:ImportantField>      
+        <b:ImportantField>b:Comments</b:ImportantField>
         <b:ImportantField>b:Pages</b:ImportantField>
       </source>
       <source type="ElectronicSource">
-				<b:ImportantField>b:Author/b:Author/b:NameList</b:ImportantField>
-				<b:ImportantField>b:Title</b:ImportantField>
-				<b:ImportantField>b:PublicationTitle</b:ImportantField>
-				<b:ImportantField>b:Year</b:ImportantField>
-				<b:ImportantField>b:City</b:ImportantField>
-				<b:ImportantField>b:Publisher</b:ImportantField>
-        <b:ImportantField>b:Comments</b:ImportantField>      
-        <b:ImportantField>b:URL</b:ImportantField>      
-			</source>
+        <b:ImportantField>b:Author/b:Author/b:NameList</b:ImportantField>
+        <b:ImportantField>b:Title</b:ImportantField>
+        <b:ImportantField>b:PublicationTitle</b:ImportantField>
+        <b:ImportantField>b:Year</b:ImportantField>
+        <b:ImportantField>b:City</b:ImportantField>
+        <b:ImportantField>b:Publisher</b:ImportantField>
+        <b:ImportantField>b:Comments</b:ImportantField>
+        <b:ImportantField>b:URL</b:ImportantField>
+      </source>
       <source type="JournalArticle">
         <b:ImportantField>b:Author/b:Author/b:NameList</b:ImportantField>
         <b:ImportantField>b:Title</b:ImportantField>
@@ -120,6 +123,12 @@
         <format>{%RefOrder%}</format>
       </source>
       <source type="ArticleInAPeriodical">
+        <format>{%RefOrder%}</format>
+      </source>
+      <source type="JournalArticle">
+        <format>{%RefOrder%}</format>
+      </source>
+       <source type="ElectronicSource">
         <format>{%RefOrder%}</format>
       </source>
       <source type="ConferenceProceedings">
@@ -161,7 +170,7 @@
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">%SortKey%</format>
+          <format lcid="">%RefOrder%</format>
         </column>
         <column id="2">
           <halign>left</halign>
@@ -170,13 +179,13 @@
           <format lcid="1049">{ {%Author:2%} {%Title%} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% изд.}{. – %City% : %Publisher%}{, %Year%}{. – T. %Volume%}{. – %Pages% с.}}</format>
           <format lcid="1058">{ {%Author:2%} {%Title%} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% вид.}{. – %City% : %Publisher%}{, %Year%}{. – T. %Volume%}{. – %Pages% с.}}</format>
         </column>
-        <sortkey>{%Comments%}{%Author:2%}</sortkey>
+        <sortkey></sortkey>
       </source>
       <source type="JournalArticle">
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{%SortKey%.}</format>
+          <format lcid="">{%RefOrder%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
@@ -185,50 +194,48 @@
           <format lcid="1049">{{%Author:2%} {%Title%}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – С. %Pages%.}}</format>
           <format lcid="1058">{{%Author:2%} {%Title%}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – С. %Pages%.}}</format>
         </column>
-      <sortkey>{%Comments%}{%Author:2%}</sortkey>      
+        <sortkey></sortkey>
       </source>
       <source type="ArticleInAPeriodical">
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{%SortKey%.}</format>
+          <format lcid="">{%RefOrder%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
           <format lcid="">{{%Author:2%} {%Title%} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}}</format>
         </column>
-      <sortkey>{%Comments%}{%Author:2%}</sortkey>
-      
+        <sortkey></sortkey>
       </source>
-    <source type="ConferenceProceedings">
+      <source type="ConferenceProceedings">
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{%SortKey%.}</format>
+          <format lcid="">{%RefOrder%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="1033">{{%Author:2%}{%Title%}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed%}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% pp.}}</format>  
-          <format lcid="1049">{{%Author:2%}{%Title%}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% г.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.}}</format>          
+          <format lcid="1033">{{%Author:2%}{%Title%}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed%}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% pp.}}</format>
+          <format lcid="1049">{{%Author:2%}{%Title%}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% г.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.}}</format>
           <format lcid="1058">{{%Author:2%}{%Title%}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% р.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.}}</format>
         </column>
-      <sortkey>{%Comments%}{%Author:2%}</sortkey>
-    
+        <sortkey></sortkey>
       </source>
-    <source type="ElectronicSource">
+      <source type="ElectronicSource">
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{%SortKey%.}</format>
+          <format lcid="">{%RefOrder%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
           <format lcid="1058">{{%Author:2%}{ %Title% [Електронний ресурс]}{ : %PublicationTitle%}{ / %Author:3%}{. – %City%: %Publisher%}{. – %Year%}{. – Режим доступу: %URL%}}</format>
         </column>
-      <sortkey>{%Comments%}{%Author:2%}</sortkey>    
+        <sortkey></sortkey>
       </source>
     </bibliography>
     <namelists>
@@ -740,16 +747,13 @@
       <b:Bibliography>
         <!-- Extend all the b:Source elements with a sortkey. -->
         <xsl:for-each select="/b:Bibliography/b:Source">
-            <xsl:sort select="concat(b:Comments, b:Author/b:Author/b:NameList/b:Person/b:Last)" data-type="text"/>          
           <b:Source>
             <!-- Copy the content of the b:Source. -->
-            <!--<xsl:copy-of select="./*" />-->
+            <xsl:copy-of select="./*" />
 
             <!-- Add a sorting key. -->
             <xsl:call-template name="create-sortkey">
               <xsl:with-param name="source" select="." />
-              <xsl:with-param name="position" select="position()" />
-            
             </xsl:call-template>
           </b:Source>
         </xsl:for-each>
@@ -870,12 +874,7 @@
 
     <table width="100%">
       <xsl:for-each select="$bibNodeSet/b:Bibliography/b:Source">
-        <xsl:sort select="b:SortKey" data-type="number"/>
-        
-        <!--<xsl:sort select="b:RefOrder" data-type="number"/>-->
-        <!--<xsl:sort select="concat(b:Comments, b:Author/b:Author/b:NameList/b:Person/b:Last)" data-type="text"/>-->
-        <!--<xsl:sort select="b:Author" data-type="text"/>-->
-
+        <xsl:sort select="b:RefOrder" data-type="number" />
         <tr>
           <xsl:call-template name="format-bibliography-table-column">
             <xsl:with-param name="columnId" select="1" />
@@ -947,15 +946,6 @@
     <td align="{$params/bibliography/source[@type = $type]/column[@id = $columnId]/halign}" valign="{$params/bibliography/source[@type = $type]/column[@id = $columnId]/valign}">
       <p class="MsoBibliography">
         <xsl:variable name="columnX">
-          
-          
-          <!--<xsl:choose>
-            <xsl:when test="1 = 1">
-              <xsl:value-of select="concat($source/b:SortKey, $source/b:Tag)" />
-            </xsl:when>
-          </xsl:choose>-->
-          
-            
           <xsl:call-template name="format-source">
             <xsl:with-param name="format" select="$format" />
             <xsl:with-param name="source" select="$source" />
@@ -3322,8 +3312,6 @@
   <xsl:template name="create-sortkey">
     <!-- The source element to create a b:SortKey element for. -->
     <xsl:param name="source" />
-    <xsl:param name="position" />
-    
 
     <!-- Retrieve the format string depending on the type of source. -->
     <xsl:variable name="formatstring">
@@ -3355,7 +3343,7 @@
     <b:SortKey>
       <xsl:choose>
         <!-- If the sortkey is not empty, convert it to uppercase and use that. -->
-        <xsl:when test="string-length($sortkey) = 0">
+        <xsl:when test="string-length($sortkey) > 0">
           <xsl:call-template name="upper-case">
             <xsl:with-param name ="string">
               <xsl:value-of select="$sortkey" disable-output-escaping="yes" />
@@ -3364,9 +3352,7 @@
         </xsl:when>
         <!-- Otherwise, use a 5 digit version of the RefOrder value. -->
         <xsl:otherwise>
-          <!--<xsl:value-of select="substring(concat('00000', $source/b:RefOrder), string-length($source/b:RefOrder) + 1, 5)" />-->
-          <xsl:value-of select="$position" />
-        
+          <xsl:value-of select="substring(concat('00000', $source/b:RefOrder), string-length($source/b:RefOrder) + 1, 5)" />
         </xsl:otherwise>
       </xsl:choose>
     </b:SortKey>
