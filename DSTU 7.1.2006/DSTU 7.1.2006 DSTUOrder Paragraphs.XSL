@@ -34,7 +34,7 @@
   <!-- Variable containing all necessary data for a certain style of bibliography. -->
   <xsl:variable name="data">
     <general>
-      <stylename>ДСТУ 7.1:2006</stylename>
+      <stylename>ДСТУ 7.1:2006 Параграфы</stylename>
       <version>2016.08.15</version>
       <version>2009.11.28</version>
       <author>Yves Dhondt (yves.dhondt@gmail.com)</author>
@@ -42,7 +42,7 @@
       <description>Style for making automatic bibliography in MS Word by DSTU 7.1:2006 (with additions in 2013)</description>
       <URL>https://github.com/meteogish/UKRBib-Style-For-Word</URL>
       <comments>
-        This style based on version 2.8 of the BibWord stylesheet.
+        This style based on version 2.9 of the BibWord stylesheet.
         But with added multilingual support of sources and months.
       </comments>
       <display_errors>yes</display_errors>
@@ -59,6 +59,8 @@
         <b:ImportantField>b:City</b:ImportantField>
         <b:ImportantField>b:Issue</b:ImportantField>
         <b:ImportantField>b:Comments</b:ImportantField>
+        <b:ImportantField>b:URL</b:ImportantField>
+
       </source>
       <source type="Book">
         <b:ImportantField>b:Author/b:Author/b:NameList</b:ImportantField>
@@ -153,7 +155,8 @@
       </source>
     </footnotecitation>
     <bibliography>
-      <columns>2</columns>
+      <firstworditalic>yes</firstworditalic>
+      <columns>1</columns>
       <source type="Placeholder">
         <column id="1">
           <halign>left</halign>
@@ -170,22 +173,25 @@
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">%RefOrder%</format>
+          <format lcid="">{%SortKey%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="1033">{ {%Author:2%} {%Title%} / {%Author:3%}{ ; ed. %Editor:3%}{. – %Edition:o% ed.}{. – %City% : %Publisher%}{, %Year%}{. – Vol. %Volume%}{. – %Pages% p.}}</format>
-          <format lcid="1049">{ {%Author:2%} {%Title%} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% изд.}{. – %City% : %Publisher%}{, %Year%}{. – T. %Volume%}{. – %Pages% с.}}</format>
-          <format lcid="1058">{ {%Author:2%} {%Title%} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% вид.}{. – %City% : %Publisher%}{, %Year%}{. – T. %Volume%}{. – %Pages% с.}}</format>
+          <!--{%URL:y%[Electronic source]}
+          {%URL:y%[Электронный ресурс]}
+          {%URL:y%[Електронний ресурс]}-->
+          <format lcid="1033">{ {%Author:2%} {%Title% {%URL|[Text]%} } / {%Author:3%}{ ; ed. %Editor:3%}{. – %Edition:o% ed.}{. – %City% : %Publisher%}{, %Year%}{. – Vol. %Volume%}{. – %Pages% p.}{. – URL: %URL:l%}}}</format>
+          <format lcid="1049">{ {%Author:2%} {%Title% {%URL|[Текст]%}} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% изд.}{. – %City% : %Publisher%}{, %Year%}{. – T. %Volume%}{. – %Pages% с.}{. – Режим доступа: %URL:l%}}</format>
+          <format lcid="1058">{ {%Author:2%} {%Title% {%URL|[Текст]%}{%URL:y%[Електронний ресурс]}} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% вид.}{. – %City% : %Publisher%}{, %Year%}{. – T. %Volume%}{. – %Pages% с.}{. – Режим доступу: %URL:l%}}</format>
         </column>
-        <sortkey></sortkey>
+        <sortkey>{%Comments%}{%Author:2%}</sortkey>
       </source>
       <source type="JournalArticle">
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{%RefOrder%.}</format>
+          <format lcid="">{%SortKey%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
@@ -194,48 +200,51 @@
           <format lcid="1049">{{%Author:2%} {%Title%}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – С. %Pages%.}}</format>
           <format lcid="1058">{{%Author:2%} {%Title%}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – С. %Pages%.}}</format>
         </column>
-        <sortkey></sortkey>
+        <sortkey>{%Comments%}{%Author:2%}{%Title%}</sortkey>
       </source>
       <source type="ArticleInAPeriodical">
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{%RefOrder%.}</format>
+          <format lcid="">{%SortKey%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{{%Author:2%} {%Title%} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}}</format>
+          <format lcid="1033">{{%Author:2%} {%Title%{%URL:y% [Electronic source]}} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – URL: %URL:l%}}}</format>
+          <format lcid="1049">{{%Author:2%} {%Title%{%URL:y% [Электронный ресурс]}} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – Режим доступа: %URL:l%}}</format>
+          <format lcid="1058">{{%Author:2%} {%Title%{%URL:y% [Електронний ресурс]}} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – Режим доступу: %URL:l%}}</format>
+
         </column>
-        <sortkey></sortkey>
+        <sortkey>{%Comments%}{%Author:2%}{%Title%}</sortkey>
       </source>
       <source type="ConferenceProceedings">
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{%RefOrder%.}</format>
+          <format lcid="">{%SortKey%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="1033">{{%Author:2%}{%Title%}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed%}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% pp.}}</format>
-          <format lcid="1049">{{%Author:2%}{%Title%}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% г.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.}}</format>
-          <format lcid="1058">{{%Author:2%}{%Title%}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% р.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.}}</format>
+          <format lcid="1033">{{%Author:2%}{%Title% {%URL:n%[Electronic source]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed%}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% pp.}    {. – URL: %URL:l%}}          </format>
+          <format lcid="1049">{{%Author:2%}{%Title% {%URL:n%[Электронный ресурс]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% г.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.} {. – Режим доступа: %URL:l%}}</format>
+          <format lcid="1058">{{%Author:2%}{%Title% {%URL:n%[Електронний ресурс]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% р.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.} {. – Режим доступу: %URL:l%}}</format>
         </column>
-        <sortkey></sortkey>
+        <sortkey>{%Comments%}{%Author:2%}{%Title%}</sortkey>
       </source>
       <source type="ElectronicSource">
         <column id="1">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="">{%RefOrder%.}</format>
+          <format lcid="">{%SortKey%.}</format>
         </column>
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="1058">{{%Author:2%}{ %Title% [Електронний ресурс]}{ : %PublicationTitle%}{ / %Author:3%}{. – %City%: %Publisher%}{. – %Year%}{. – Режим доступу: %URL%}}</format>
+          <format lcid="1058">{{%Author:2%}{ %Title% {%URL:n%[Електронний ресурс]}}{ : %PublicationTitle%}{ / %Author:3%}{. – %City%: %Publisher%}{. – %Year%}{. – Режим доступу: %URL:l%}}</format>
         </column>
-        <sortkey></sortkey>
+        <sortkey>{%Comments%}{%Author:2%}{%Title%}</sortkey>
       </source>
     </bibliography>
     <namelists>
@@ -799,29 +808,26 @@
   <!-- Formats a bibliography as a series of paragraphs. -->
   <xsl:template name="format-bibliography-as-paragraphs">
     <xsl:param name="bibNodeSet" />
-
-    <xsl:for-each select="$bibNodeSet/b:Bibliography/b:Source">
-      <xsl:sort select="b:SortKey" data-type="text" />
-
-      <p class="MsoBibliography">
+    <ol>
+      <xsl:for-each select="$bibNodeSet/b:Bibliography/b:Source">
+        <xsl:sort select="b:SortKey" data-type="text" lang="ru" />
         <!-- Get the format string. -->
         <xsl:variable name="format">
           <xsl:variable name="type" select="./b:Type" />
           <xsl:variable name="sourcetype" select="./b:SourceType" />
           <xsl:variable name="lcid" select="./b:LCID" />
-
           <xsl:choose>
             <!-- If there is no source type, its a placeholder. -->
-            <xsl:when test="string-length($sourcetype) = 0 and string-length(msxsl:node-set($data)/bibliography/source[@type = 'Placeholder']/column[@id = '1']/format[@lcid = $lcid or string-length(@lcid)=0]) > 0">
-              <xsl:value-of select="msxsl:node-set($data)/bibliography/source[@type = 'Placeholder']/column[@id = '1']/format" />
+            <xsl:when test="string-length($sourcetype) = 0 and string-length(msxsl:node-set($data)/bibliography/source[@type = 'Placeholder']/column[@id = '2']/format[@lcid = $lcid or string-length(@lcid)=0]) > 0">
+              <xsl:value-of select="msxsl:node-set($data)/bibliography/source[@type = 'Placeholder']/column[@id = '2']/format" />
             </xsl:when>
             <!-- Go for the type element if available. -->
-            <xsl:when test="string-length($type) > 0 and string-length(msxsl:node-set($data)/bibliography/source[@type = $type]/column[@id = '1']/format[@lcid = $lcid or string-length(@lcid)=0]) > 0 ">
-              <xsl:value-of select="msxsl:node-set($data)/bibliography/source[@type = $type]/column[@id = '1']/format" />
+            <xsl:when test="string-length($type) > 0 and string-length(msxsl:node-set($data)/bibliography/source[@type = $type]/column[@id = '2']/format[@lcid = $lcid or string-length(@lcid)=0]) > 0 ">
+              <xsl:value-of select="msxsl:node-set($data)/bibliography/source[@type = $type]/column[@id = '2']/format" />
             </xsl:when>
             <!-- Else go for the source type element if available. -->
-            <xsl:when test="string-length(msxsl:node-set($data)/bibliography/source[@type = $sourcetype]/column[@id = '1']/format[@lcid = $lcid or string-length(@lcid)=0]) > 0 ">
-              <xsl:value-of select="msxsl:node-set($data)/bibliography/source[@type = $sourcetype]/column[@id = '1']/format[@lcid = $lcid or string-length(@lcid)=0]" />
+            <xsl:when test="string-length(msxsl:node-set($data)/bibliography/source[@type = $sourcetype]/column[@id = '2']/format[@lcid = $lcid or string-length(@lcid)=0]) > 0 ">
+              <xsl:value-of select="msxsl:node-set($data)/bibliography/source[@type = $sourcetype]/column[@id = '2']/format[@lcid = $lcid or string-length(@lcid)=0]" />
             </xsl:when>
             <!-- Else display error message. -->
             <xsl:otherwise>
@@ -843,26 +849,66 @@
         </xsl:variable>
 
         <!-- Format the source. -->
-        <xsl:variable name="paragraphX">
+        <xsl:variable name="parBibText">
           <xsl:call-template name="format-source">
             <xsl:with-param name="format" select="$format" />
             <xsl:with-param name="source" select="." />
           </xsl:call-template>
         </xsl:variable>
 
-        <!-- Convert the formatted source to html. -->
-        <xsl:choose>
-          <xsl:when test="msxsl:node-set($data)/general/citation_as_link = 'yes'">
-            <a name="{./b:Tag}">
-              <xsl:value-of select="$paragraphX" disable-output-escaping="yes" />
-            </a>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="$paragraphX" disable-output-escaping="yes" />
-          </xsl:otherwise>
-        </xsl:choose>
-      </p>
-    </xsl:for-each>
+        <xsl:variable name ="firstSpace">
+          <xsl:choose>
+            <xsl:when test="contains($parBibText, '&#0160;')">
+              <xsl:choose>
+                <xsl:when test="string-length(substring-before($parBibText, '&#0160;')) > string-length(substring-before($parBibText, ' '))">
+                  <xsl:value-of select="' '"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="'&#0160;'"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="' '"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+
+
+
+        <xsl:variable name ="paragraphX">
+          <xsl:choose>
+            <xsl:when test="msxsl:node-set($data)/bibliography/firstworditalic = 'yes'">
+              &lt;i&gt;
+              <xsl:value-of select="substring-before($parBibText, $firstSpace)" />
+              &lt;/i&gt;
+              <xsl:value-of select="substring-after($parBibText, $firstSpace)" />
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$parBibText"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+
+        <li>
+          <p style="Normal" align="justify">
+
+            <!-- Convert the formatted source to html. -->
+
+            <xsl:choose>
+              <xsl:when test="msxsl:node-set($data)/general/citation_as_link = 'yes'">
+                <a name="{./b:Tag}">
+                  <xsl:value-of select="$paragraphX" disable-output-escaping="yes" />
+                </a>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="$paragraphX" disable-output-escaping="yes" />
+              </xsl:otherwise>
+            </xsl:choose>
+          </p>
+        </li>
+      </xsl:for-each>
+    </ol>
   </xsl:template>
 
   <!-- Formats a bibliography as a table. -->
@@ -874,7 +920,7 @@
 
     <table width="100%">
       <xsl:for-each select="$bibNodeSet/b:Bibliography/b:Source">
-        <xsl:sort select="b:RefOrder" data-type="number" />
+        <xsl:sort select="b:SortKey" data-type="text" />
         <tr>
           <xsl:call-template name="format-bibliography-table-column">
             <xsl:with-param name="columnId" select="1" />
@@ -1254,10 +1300,20 @@
                   </xsl:when>
                   <!-- Handle URLs. -->
                   <xsl:when test="$name = 'URL' and string($source/b:URL)">
-                    <xsl:call-template name="format-url">
-                      <xsl:with-param name="url" select="$source/b:URL" />
-                      <xsl:with-param name="options" select="$options" />
-                    </xsl:call-template>
+                    <xsl:choose>
+                      <xsl:when test="contains($options, 'y')">
+                        <xsl:call-template name ="format-url">
+                          <xsl:with-param name="url" select="''"/>
+                          <xsl:with-param name="options" select="$options"/>
+                        </xsl:call-template>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:call-template name ="format-url">
+                          <xsl:with-param name="url" select="string($source/b:URL)"/>
+                          <xsl:with-param name="options" select="$options"/>
+                        </xsl:call-template>
+                      </xsl:otherwise>
+                    </xsl:choose>
                   </xsl:when>
                   <!-- Handle years and years accessed. -->
                   <xsl:when test="starts-with($name, 'Year') and string($source/*[local-name() = $name])">
@@ -2165,11 +2221,22 @@
     <!-- Options (l: display as clickable link, s: split url over multiple lines) -->
     <xsl:param name="options" />
 
+    <!--<xsl:variable name="URL">
+      <xsl:choose>
+        <xsl:when test="contains($options, 'n') and string-length($url) > 0">
+          <xsl:value-of select="''"/>
+        </xsl:when>
+        <xsl:when test="contains($options, 'y') and string-length($url) = 0">
+          <xsl:value-of select="''"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>-->
+
     <xsl:if test="string-length($url) > 0">
       <!-- Open tag. -->
       <xsl:if test="contains($options, 'l')">
         <xsl:text>&lt;a href="</xsl:text>
-        <xsl:value-of select="$url" />
+            <xsl:value-of select="$url" />
         <xsl:text>"&gt;</xsl:text>
       </xsl:if>
 
@@ -2187,6 +2254,9 @@
             <xsl:with-param name="afterChars" select="'/'" />
           </xsl:call-template>
         </xsl:when>
+        <!--<xsl:when test="contains($options, 'n') or contains($options, 'y')">
+          <xsl:value-of select="''"/>
+        </xsl:when>-->
         <!-- Don't manipulate URL for display. -->
         <xsl:otherwise>
           <xsl:value-of select="$url" />
