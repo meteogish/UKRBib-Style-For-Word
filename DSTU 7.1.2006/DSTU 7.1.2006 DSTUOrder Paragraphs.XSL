@@ -60,7 +60,6 @@
         <b:ImportantField>b:Issue</b:ImportantField>
         <b:ImportantField>b:Comments</b:ImportantField>
         <b:ImportantField>b:URL</b:ImportantField>
-
       </source>
       <source type="Book">
         <b:ImportantField>b:Author/b:Author/b:NameList</b:ImportantField>
@@ -74,6 +73,7 @@
         <b:ImportantField>b:Pages</b:ImportantField>
         <b:ImportantField>b:StandardNumber</b:ImportantField>
         <b:ImportantField>b:Comments</b:ImportantField>
+        <b:ImportantField>b:URL</b:ImportantField>
       </source>
       <source type="ConferenceProceedings">
         <b:ImportantField>b:Author/b:Author/b:NameList</b:ImportantField>
@@ -89,6 +89,7 @@
         <b:ImportantField>b:Publisher</b:ImportantField>
         <b:ImportantField>b:Comments</b:ImportantField>
         <b:ImportantField>b:Pages</b:ImportantField>
+        <b:ImportantField>b:URL</b:ImportantField>
       </source>
       <source type="ElectronicSource">
         <b:ImportantField>b:Author/b:Author/b:NameList</b:ImportantField>
@@ -178,12 +179,9 @@
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <!--{%URL:y%[Electronic source]}
-          {%URL:y%[Электронный ресурс]}
-          {%URL:y%[Електронний ресурс]}-->
-          <format lcid="1033">{ {%Author:2%} {%Title% {%URL|[Text]%} } / {%Author:3%}{ ; ed. %Editor:3%}{. – %Edition:o% ed.}{. – %City% : %Publisher%}{, %Year%}{. – Vol. %Volume%}{. – %Pages% p.}{. – URL: %URL:l%}}}</format>
-          <format lcid="1049">{ {%Author:2%} {%Title% {%URL|[Текст]%}} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% изд.}{. – %City% : %Publisher%}{, %Year%}{. – T. %Volume%}{. – %Pages% с.}{. – Режим доступа: %URL:l%}}</format>
-          <format lcid="1058">{ {%Author:2%} {%Title% {%URL|[Текст]%}{%URL:y%[Електронний ресурс]}} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% вид.}{. – %City% : %Publisher%}{, %Year%}{. – T. %Volume%}{. – %Pages% с.}{. – Режим доступу: %URL:l%}}</format>
+          <format lcid="1033">{ {%Author:2%} {%Title%{%URL:y% [Electronic source]}} / {%Author:3%}{ ; ed. %Editor:3%}{. – %Edition:o% ed.}{. – %City% : %Publisher%}{. – %Year%}{. – Vol. %Volume%}{. – %Pages% p.}{. – URL: %URL:l%}}}</format>
+          <format lcid="1049">{ {%Author:2%} {%Title%{%URL:y% [Электронный ресурс]}} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% изд.}{. – %City% : %Publisher%}{. – %Year%}{. – T. %Volume%}{. – %Pages% с.}{. – Режим доступа: %URL:l%}}</format>
+          <format lcid="1058">{ {%Author:2%} {%Title%{%URL:y% [Електронний ресурс]}} / {%Author:3%}{ ; пер. %Translator:3%}{ ; ред. %Editor:3%}{. – %Edition% вид.}{. – %City% : %Publisher%}{. – %Year%}{. – T. %Volume%}{. – %Pages% с.}{. – Режим доступу: %URL:l%}}</format>
         </column>
         <sortkey>{%Comments%}{%Author:2%}</sortkey>
       </source>
@@ -196,9 +194,9 @@
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="1033">{{%Author:2%} {%Title%}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – P. %Pages%.}}</format>
-          <format lcid="1049">{{%Author:2%} {%Title%}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – С. %Pages%.}}</format>
-          <format lcid="1058">{{%Author:2%} {%Title%}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – С. %Pages%.}}</format>
+          <format lcid="1033">{{%Author:2%} {%Title%{%URL:y% [Electronic source]}}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – P. %Pages%.}}{. – URL : %URL:l%}}}</format>
+          <format lcid="1049">{{%Author:2%} {%Title%{%URL:y% [Электронный ресурс]}}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – С. %Pages%.}}{. – Режим доступа : %URL:l%}}</format>
+          <format lcid="1058">{{%Author:2%} {%Title%{%URL:y% [Електронний ресурс]}}{ / %Author:3%}{, пер. %Translator:3%}{ // %JournalName%}{. – %City% : %Publisher%}{. – %Year%}{. – № %Issue%}{. – С. %Pages%.}}{. – Режим доступу : %URL:l%}}</format>
         </column>
         <sortkey>{%Comments%}{%Author:2%}{%Title%}</sortkey>
       </source>
@@ -211,9 +209,9 @@
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="1033">{{%Author:2%} {%Title%{%URL:y% [Electronic source]}} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – URL: %URL:l%}}}</format>
-          <format lcid="1049">{{%Author:2%} {%Title%{%URL:y% [Электронный ресурс]}} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – Режим доступа: %URL:l%}}</format>
-          <format lcid="1058">{{%Author:2%} {%Title%{%URL:y% [Електронний ресурс]}} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – Режим доступу: %URL:l%}}</format>
+          <format lcid="1033">{{%Author:2%} {%Title%{%URL:y% [Electronic source]} } / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – URL : %URL:l%}}}</format>
+          <format lcid="1049">{{%Author:2%} {%Title%{%URL:y% [Электронный ресурс]}} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – Режим доступа : %URL:l%}}</format>
+          <format lcid="1058">{{%Author:2%} {%Title%{%URL:y% [Електронний ресурс]}} / {%Author:3%}{ // %PeriodicalTitle%}{. – %City% : %Publisher%}{. – %Year%}{. – %Month:s%}{. – № %Issue%}{. – С. %Pages%.}{. – Режим доступу : %URL:l%}}</format>
 
         </column>
         <sortkey>{%Comments%}{%Author:2%}{%Title%}</sortkey>
@@ -227,9 +225,9 @@
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="1033">{{%Author:2%}{%Title% {%URL:n%[Electronic source]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed%}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% pp.}    {. – URL: %URL:l%}}          </format>
-          <format lcid="1049">{{%Author:2%}{%Title% {%URL:n%[Электронный ресурс]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% г.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.} {. – Режим доступа: %URL:l%}}</format>
-          <format lcid="1058">{{%Author:2%}{%Title% {%URL:n%[Електронний ресурс]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% р.}{, %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.} {. – Режим доступу: %URL:l%}}</format>
+          <format lcid="1033">{{%Author:2%}{%Title%{%URL:y% [Electronic source]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed%}{. – %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% pp.}{. – URL : %URL:l%}}</format>
+          <format lcid="1049">{{%Author:2%}{%Title%{%URL:y% [Электронный ресурс]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% г.}{. – %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.} {. – Режим доступа : %URL:l%}}</format>
+          <format lcid="1058">{{%Author:2%}{%Title%{%URL:y% [Електронний ресурс]}}{ / %Author:3%}{ // %ConferenceName%}{, %DayAccessed% %MonthAccessed:s% %YearAccessed% р.}{. – %City%.}{ T. %Volume%}{ / ред. %Editor:3%}{. – %City%: %Publisher%}{, %Year%}{. – %Pages% c.} {. – Режим доступу : %URL:l%}}</format>
         </column>
         <sortkey>{%Comments%}{%Author:2%}{%Title%}</sortkey>
       </source>
@@ -242,7 +240,9 @@
         <column id="2">
           <halign>left</halign>
           <valign>top</valign>
-          <format lcid="1058">{{%Author:2%}{ %Title% {%URL:n%[Електронний ресурс]}}{ : %PublicationTitle%}{ / %Author:3%}{. – %City%: %Publisher%}{. – %Year%}{. – Режим доступу: %URL:l%}}</format>
+          <format lcid="1033">{{%Author:2%}{ %Title%{%URL:y% [Electronic source]}}{ : %PublicationTitle%}{ / %Author:3%}{. – %City%: %Publisher%}{. – %Year%}{. – Режим доступу : %URL:l%}}</format>
+          <format lcid="1049">{{%Author:2%}{ %Title%{%URL:y% [Электронный ресурс]}}{ : %PublicationTitle%}{ / %Author:3%}{. – %City%: %Publisher%}{. – %Year%}{. – Режим доступу : %URL:l%}}</format>
+          <format lcid="1058">{{%Author:2%}{ %Title%{%URL:y% [Електронний ресурс]}}{ : %PublicationTitle%}{ / %Author:3%}{. – %City%: %Publisher%}{. – %Year%}{. – Режим доступу : %URL:l%}}</format>
         </column>
         <sortkey>{%Comments%}{%Author:2%}{%Title%}</sortkey>
       </source>
@@ -891,7 +891,8 @@
         </xsl:variable>
 
         <li>
-          <p style="Normal" align="justify">
+          <!--<div class="MsoBibliography" style="text-align: justify;">-->
+          <p class="MsoBibliography" style="text-align: justify;">
 
             <!-- Convert the formatted source to html. -->
 
